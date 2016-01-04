@@ -1,6 +1,6 @@
 import std.stdio;
 import core.stdc.stdio;
-import nlopt;
+import nlopt.nlopt;
 import std.math;
 import std.conv;
 
