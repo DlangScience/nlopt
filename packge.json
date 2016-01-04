@@ -1,0 +1,12 @@
+{
+    "name": "nlopt",
+    "description": "D nlopt header",
+    "targetType": "library",
+    "homepage": "https://github.com/dataPulverizer/nlopt",
+    "copyright": "Copyright © 2016 Chibisi Chima-Okereke",
+    "authors": [
+        "Chibisi Chima-Okereke"
+    ],
+    "license": "BSL-1.0",
+    "libs": ["nlopt"]
+}
