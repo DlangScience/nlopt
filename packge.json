@@ -7,6 +7,6 @@
     "authors": [
         "Chibisi Chima-Okereke"
     ],
-    "license": "BSL-1.0",
+    "license": "LGPL v3.0",
     "libs": ["nlopt"]
 }
