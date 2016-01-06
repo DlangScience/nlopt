@@ -26,7 +26,7 @@ T[] amap(T)(T[] x, T function(T) fun){
 
 void main(){
   
-  extern (C) double myfunc(uint n, const double *x, double *grad, void *my_func_data)
+  extern (C) double myfunc(uint n, const(double)* x, double* grad, void* my_func_data)
   {
     if (grad) {
         grad[0] = 0.0;
@@ -39,7 +39,7 @@ void main(){
     double a, b;
   };
   
-  extern (C) double myconstraint(uint n, const double *x, double *grad, void *data)
+  extern (C) double myconstraint(uint n, const(double)* x, double* grad, void* data)
   {
     my_constraint_data *d = cast(my_constraint_data *) data;
     double a = (*d).a, b = (*d).b;
