@@ -84,6 +84,53 @@ enum nlopt_algorithm {
      NLOPT_NUM_ALGORITHMS /* not an algorithm, just the number of them */
 };
 
+
+enum NLOPT_GN_DIRECT = nlopt_algorithm.NLOPT_GN_DIRECT;
+enum NLOPT_GN_DIRECT_L = nlopt_algorithm.NLOPT_GN_DIRECT_L;
+enum NLOPT_GN_DIRECT_L_RAND = nlopt_algorithm.NLOPT_GN_DIRECT_L_RAND;
+enum NLOPT_GN_DIRECT_NOSCAL = nlopt_algorithm.NLOPT_GN_DIRECT_NOSCAL;
+enum NLOPT_GN_DIRECT_L_NOSCAL = nlopt_algorithm.NLOPT_GN_DIRECT_L_NOSCAL;
+enum NLOPT_GN_DIRECT_L_RAND_NOSCAL = nlopt_algorithm.NLOPT_GN_DIRECT_L_RAND_NOSCAL;
+enum NLOPT_GN_ORIG_DIRECT = nlopt_algorithm.NLOPT_GN_ORIG_DIRECT;
+enum NLOPT_GN_ORIG_DIRECT_L = nlopt_algorithm.NLOPT_GN_ORIG_DIRECT_L;
+enum NLOPT_GD_STOGO = nlopt_algorithm.NLOPT_GD_STOGO;
+enum NLOPT_GD_STOGO_RAND = nlopt_algorithm.NLOPT_GD_STOGO_RAND;
+enum NLOPT_LD_LBFGS_NOCEDAL = nlopt_algorithm.NLOPT_LD_LBFGS_NOCEDAL;
+enum NLOPT_LD_LBFGS = nlopt_algorithm.NLOPT_LD_LBFGS;
+enum NLOPT_LN_PRAXIS = nlopt_algorithm.NLOPT_LN_PRAXIS;
+enum NLOPT_LD_VAR1 = nlopt_algorithm.NLOPT_LD_VAR1;
+enum NLOPT_LD_VAR2 = nlopt_algorithm.NLOPT_LD_VAR2;
+enum NLOPT_LD_TNEWTON = nlopt_algorithm.NLOPT_LD_TNEWTON;
+enum NLOPT_LD_TNEWTON_RESTART = nlopt_algorithm.NLOPT_LD_TNEWTON_RESTART;
+enum NLOPT_LD_TNEWTON_PRECOND = nlopt_algorithm.NLOPT_LD_TNEWTON_PRECOND;
+enum NLOPT_LD_TNEWTON_PRECOND_RESTART = nlopt_algorithm.NLOPT_LD_TNEWTON_PRECOND_RESTART;
+enum NLOPT_GN_CRS2_LM = nlopt_algorithm.NLOPT_GN_CRS2_LM;
+enum NLOPT_GN_MLSL = nlopt_algorithm.NLOPT_GN_MLSL;
+enum NLOPT_GD_MLSL = nlopt_algorithm.NLOPT_GD_MLSL;
+enum NLOPT_GN_MLSL_LDS = nlopt_algorithm.NLOPT_GN_MLSL_LDS;
+enum NLOPT_GD_MLSL_LDS = nlopt_algorithm.NLOPT_GD_MLSL_LDS;
+enum NLOPT_LD_MMA = nlopt_algorithm.NLOPT_LD_MMA;
+enum NLOPT_LN_COBYLA = nlopt_algorithm.NLOPT_LN_COBYLA;
+enum NLOPT_LN_NEWUOA = nlopt_algorithm.NLOPT_LN_NEWUOA;
+enum NLOPT_LN_NEWUOA_BOUND = nlopt_algorithm.NLOPT_LN_NEWUOA_BOUND;
+enum NLOPT_LN_NELDERMEAD = nlopt_algorithm.NLOPT_LN_NELDERMEAD;
+enum NLOPT_LN_SBPLX = nlopt_algorithm.NLOPT_LN_SBPLX;
+enum NLOPT_LN_AUGLAG = nlopt_algorithm.NLOPT_LN_AUGLAG;
+enum NLOPT_LD_AUGLAG = nlopt_algorithm.NLOPT_LD_AUGLAG;
+enum NLOPT_LN_AUGLAG_EQ = nlopt_algorithm.NLOPT_LN_AUGLAG_EQ;
+enum NLOPT_LD_AUGLAG_EQ = nlopt_algorithm.NLOPT_LD_AUGLAG_EQ;
+enum NLOPT_LN_BOBYQA = nlopt_algorithm.NLOPT_LN_BOBYQA;
+enum NLOPT_GN_ISRES = nlopt_algorithm.NLOPT_GN_ISRES;
+enum NLOPT_AUGLAG = nlopt_algorithm.NLOPT_AUGLAG;
+enum NLOPT_AUGLAG_EQ = nlopt_algorithm.NLOPT_AUGLAG_EQ;
+enum NLOPT_G_MLSL = nlopt_algorithm.NLOPT_G_MLSL;
+enum NLOPT_G_MLSL_LDS = nlopt_algorithm.NLOPT_G_MLSL_LDS;
+enum NLOPT_LD_SLSQP = nlopt_algorithm.NLOPT_LD_SLSQP;
+enum NLOPT_LD_CCSAQ = nlopt_algorithm.NLOPT_LD_CCSAQ;
+enum NLOPT_GN_ESCH = nlopt_algorithm.NLOPT_GN_ESCH;
+enum NLOPT_NUM_ALGORITHMS = nlopt_algorithm.NLOPT_NUM_ALGORITHMS;
+
+
 const(char)* nlopt_algorithm_name(nlopt_algorithm a);
 
 enum nlopt_result {
@@ -99,6 +146,18 @@ enum nlopt_result {
      NLOPT_MAXEVAL_REACHED = 5,
      NLOPT_MAXTIME_REACHED = 6
 };
+
+enum NLOPT_FAILURE = nlopt_result.NLOPT_FAILURE;
+enum NLOPT_INVALID_ARGS = nlopt_result.NLOPT_INVALID_ARGS;
+enum NLOPT_OUT_OF_MEMORY = nlopt_result.NLOPT_OUT_OF_MEMORY;
+enum NLOPT_ROUNDOFF_LIMITED = nlopt_result.NLOPT_ROUNDOFF_LIMITED;
+enum NLOPT_FORCED_STOP = nlopt_result.NLOPT_FORCED_STOP;
+enum NLOPT_SUCCESS = nlopt_result.NLOPT_SUCCESS;
+enum NLOPT_STOPVAL_REACHED = nlopt_result.NLOPT_STOPVAL_REACHED;
+enum NLOPT_FTOL_REACHED = nlopt_result.NLOPT_FTOL_REACHED;
+enum NLOPT_XTOL_REACHED = nlopt_result.NLOPT_XTOL_REACHED;
+enum NLOPT_MAXEVAL_REACHED = nlopt_result.NLOPT_MAXEVAL_REACHED;
+enum NLOPT_MAXTIME_REACHED = nlopt_result.NLOPT_MAXTIME_REACHED;
 
 void nlopt_srand(ulong seed);
 void nlopt_srand_time();
