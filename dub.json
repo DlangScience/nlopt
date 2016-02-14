@@ -1,6 +1,8 @@
 {
     "name": "nlopt",
     "description": "D nlopt header",
+    "version": "0.1.0",
+    "dflags-dmd": ["-L-lnlopt -L-lm"],
     "targetType": "library",
     "homepage": "https://github.com/dataPulverizer/nlopt",
     "copyright": "Copyright © 2016 Chibisi Chima-Okereke",
