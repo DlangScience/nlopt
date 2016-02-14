@@ -307,6 +307,7 @@ T[] amap(T)(T[] x, T function(T) fun){
   return x;
 }
 
+// Unit tests
 unittest{
   extern (C) double myfunc(uint n, const(double)* x, double* grad, void* my_func_data)
   {
