@@ -1,0 +1,23 @@
+{
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"dub test --compiler=dmd"
+			],
+			"file_regex": "^(.*?)\\(([0-9]+)\\)",
+			"name": "dub package",
+			"selector": "source.d",
+			"shell": true,
+			"working_dir": "${project_path:${folder}}"
+		}
+	],
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "./"
+		}
+	]
+}

@@ -291,25 +291,31 @@ void nlopt_set_local_search_algorithm(nlopt_algorithm deriv, nlopt_algorithm non
 int nlopt_get_stochastic_population();
 void nlopt_set_stochastic_population(int pop);
 
-T round_dp(T)(T x, int dp = 0){
-  T factor = pow(10, dp + 1);
-  x *= factor;
-  x += 1.;
-  x /= 10.;
-  factor /= 10.;
-  return round(x)/factor;
-}
-
-T[] amap(T)(T[] x, T function(T) fun){
-  foreach(ref el; x){
-    el = fun(el);
-  }
-  return x;
-}
-
 // Unit tests
-unittest{
-  extern (C) double myfunc(uint n, const(double)* x, double* grad, void* my_func_data)
+/*unittest{
+  
+  import std.stdio;
+  import core.stdc.stdio;
+  import std.math: sqrt, pow, round;
+  import std.conv; // to!string
+
+  T round_dp(T)(T x, int dp = 0){
+    T factor = pow(10, dp + 1);
+    x *= factor;
+    x += 1.;
+    x /= 10.;
+    factor /= 10.;
+    return round(x)/factor;
+  }
+
+  T[] amap(T)(T[] x, T function(T) fun){
+    foreach(ref el; x){
+      el = fun(el);
+    }
+    return x;
+  }
+
+  extern (C) double myfunc(uint n, const(double)* x, double *grad, void *my_func_data)
   {
     if (grad) {
         grad[0] = 0.0;
@@ -322,7 +328,8 @@ unittest{
     double a, b;
   };
   
-  extern (C) double myconstraint(uint n, const(double)* x, double* grad, void* data)
+  // constraint callback function
+  extern (C) double myconstraint(uint n, const double *x, double *grad, void *data)
   {
     my_constraint_data *d = cast(my_constraint_data *) data;
     double a = (*d).a, b = (*d).b;
@@ -333,12 +340,14 @@ unittest{
     return ((a*x[0] + b) * (a*x[0] + b) * (a*x[0] + b) - x[1]);
    }
   
-  double lb[2] = [-double.infinity, 0];
+  double lb[2] = [-double.infinity, 0]; // lower bounds
   nlopt_opt opt;
+  // Specify the algorithm to use
   auto algorithm = nlopt_algorithm.NLOPT_LD_MMA;
 
-  opt = nlopt_create(algorithm, 2);
+  opt = nlopt_create(algorithm, 2); // algorithm and dimensionality 
   nlopt_set_lower_bounds(opt, lb.ptr);
+  // The callback must be a pointer
   nlopt_set_min_objective(opt, &myfunc, null);
   my_constraint_data data[2] = [{2,0}, {-1,1}];
   nlopt_add_inequality_constraint(opt, &myconstraint, &data[0], 1e-8);
@@ -346,16 +355,21 @@ unittest{
   
   nlopt_set_xtol_rel(opt, 1e-4);
   
-  double x[2] = [1.234, 5.678];
-  double minf;
+  double x[2] = [1.234, 5.678];  // some initial guess
+  double minf; // the minimum objective value, upon return
   
   nlopt_optimize(opt, x.ptr, &minf);
+
+  writeln("Minimum: ", x, "\nObjective @ minimum: ", minf);
+  //const(char)* output = nlopt_algorithm_name(algorithm);
+  writeln("Optimization Method: ", to!string(nlopt_algorithm_name(algorithm)));
   
-  nlopt_destroy(opt);
+  nlopt_destroy(opt); // destroy the object to finish
   
   amap!(double)(x, (x) => round_dp(x, 3));
   assert(x == [0.333, 0.296]);
-}
+
+}*/
 
 }
 
