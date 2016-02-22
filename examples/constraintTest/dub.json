@@ -1,0 +1,8 @@
+{
+    "name": "nlopt_example",
+    "targetType": "executable",
+    "sourcePaths": ["."],
+    "dependencies": {
+        "nlopt": { "path": "../../" }
+    }
+}
