@@ -130,7 +130,7 @@ enum NLOPT_GN_ESCH = nlopt_algorithm.NLOPT_GN_ESCH;
 enum NLOPT_NUM_ALGORITHMS = nlopt_algorithm.NLOPT_NUM_ALGORITHMS;
 
 
-const(char)* nlopt_algorithm_name(nlopt_algorithm a);
+extern(System) const(char)* nlopt_algorithm_name(nlopt_algorithm a);
 
 enum nlopt_result
 {
@@ -159,9 +159,12 @@ enum NLOPT_XTOL_REACHED = nlopt_result.NLOPT_XTOL_REACHED;
 enum NLOPT_MAXEVAL_REACHED = nlopt_result.NLOPT_MAXEVAL_REACHED;
 enum NLOPT_MAXTIME_REACHED = nlopt_result.NLOPT_MAXTIME_REACHED;
 
-void nlopt_srand(ulong seed);
-void nlopt_srand_time();
-void nlopt_version(int* major, int* minor, int* bugfix);
+extern(System)
+{
+	void nlopt_srand(ulong seed);
+	void nlopt_srand_time();
+	void nlopt_version(int* major, int* minor, int* bugfix);
+}
 
 struct nlopt_opt_s; /* opaque structure, defined internally */
 alias nlopt_opt = nlopt_opt_s*;
@@ -169,80 +172,83 @@ alias nlopt_opt = nlopt_opt_s*;
 /* the only immutable parameters of an optimization are the algorithm and
    the dimension n of the problem, since changing either of these could
    have side-effects on lots of other parameters */
-nlopt_opt nlopt_create(nlopt_algorithm algorithm, uint n);
-void nlopt_destroy(nlopt_opt opt);
-nlopt_opt nlopt_copy(const(nlopt_opt) opt);
+extern(System)
+{
+	nlopt_opt nlopt_create(nlopt_algorithm algorithm, uint n);
+	void nlopt_destroy(nlopt_opt opt);
+	nlopt_opt nlopt_copy(const(nlopt_opt) opt);
 
-nlopt_result nlopt_optimize(nlopt_opt opt, double* x, double* opt_f);
+	nlopt_result nlopt_optimize(nlopt_opt opt, double* x, double* opt_f);
 
-nlopt_result nlopt_set_min_objective(nlopt_opt opt, nlopt_func f, void* f_data);
-nlopt_result nlopt_set_max_objective(nlopt_opt opt, nlopt_func f, void* f_data);
+	nlopt_result nlopt_set_min_objective(nlopt_opt opt, nlopt_func f, void* f_data);
+	nlopt_result nlopt_set_max_objective(nlopt_opt opt, nlopt_func f, void* f_data);
 
-nlopt_result nlopt_set_precond_min_objective(nlopt_opt opt, nlopt_func f, nlopt_precond pre, void* f_data);
-nlopt_result nlopt_set_precond_max_objective(nlopt_opt opt, nlopt_func f, nlopt_precond pre, void* f_data);
+	nlopt_result nlopt_set_precond_min_objective(nlopt_opt opt, nlopt_func f, nlopt_precond pre, void* f_data);
+	nlopt_result nlopt_set_precond_max_objective(nlopt_opt opt, nlopt_func f, nlopt_precond pre, void* f_data);
 
-nlopt_algorithm nlopt_get_algorithm(const(nlopt_opt) opt);
-uint nlopt_get_dimension(const(nlopt_opt) opt);
+	nlopt_algorithm nlopt_get_algorithm(const(nlopt_opt) opt);
+	uint nlopt_get_dimension(const(nlopt_opt) opt);
 
 /* constraints: */
 
-nlopt_result nlopt_set_lower_bounds(nlopt_opt opt, const(double)* lb);
-nlopt_result nlopt_set_lower_bounds1(nlopt_opt opt, double lb);
-nlopt_result nlopt_get_lower_bounds(const(nlopt_opt) opt, double* lb);
-nlopt_result nlopt_set_upper_bounds(nlopt_opt opt, const(double)* ub);
-nlopt_result nlopt_set_upper_bounds1(nlopt_opt opt, double ub);
-nlopt_result nlopt_get_upper_bounds(const(nlopt_opt) opt, double* ub);
+	nlopt_result nlopt_set_lower_bounds(nlopt_opt opt, const(double)* lb);
+	nlopt_result nlopt_set_lower_bounds1(nlopt_opt opt, double lb);
+	nlopt_result nlopt_get_lower_bounds(const(nlopt_opt) opt, double* lb);
+	nlopt_result nlopt_set_upper_bounds(nlopt_opt opt, const(double)* ub);
+	nlopt_result nlopt_set_upper_bounds1(nlopt_opt opt, double ub);
+	nlopt_result nlopt_get_upper_bounds(const(nlopt_opt) opt, double* ub);
 
-nlopt_result nlopt_remove_inequality_constraints(nlopt_opt opt);
-nlopt_result nlopt_add_inequality_constraint(nlopt_opt opt, nlopt_func fc, void* fc_data, double tol);
-nlopt_result nlopt_add_precond_inequality_constraint(nlopt_opt opt, nlopt_func fc, nlopt_precond pre, void* fc_data, double tol);
-nlopt_result nlopt_add_inequality_mconstraint(nlopt_opt opt, uint m, nlopt_mfunc fc, void* fc_data, const(double)* tol);
+	nlopt_result nlopt_remove_inequality_constraints(nlopt_opt opt);
+	nlopt_result nlopt_add_inequality_constraint(nlopt_opt opt, nlopt_func fc, void* fc_data, double tol);
+	nlopt_result nlopt_add_precond_inequality_constraint(nlopt_opt opt, nlopt_func fc, nlopt_precond pre, void* fc_data, double tol);
+	nlopt_result nlopt_add_inequality_mconstraint(nlopt_opt opt, uint m, nlopt_mfunc fc, void* fc_data, const(double)* tol);
 
-nlopt_result nlopt_remove_equality_constraints(nlopt_opt opt);
-nlopt_result nlopt_add_equality_constraint(nlopt_opt opt, nlopt_func h, void* h_data, double tol);
-nlopt_result nlopt_add_precond_equality_constraint(nlopt_opt opt, nlopt_func h, nlopt_precond pre, void* h_data, double tol);
-nlopt_result nlopt_add_equality_mconstraint(nlopt_opt opt, uint m, nlopt_mfunc h, void* h_data, const(double)* tol);
+	nlopt_result nlopt_remove_equality_constraints(nlopt_opt opt);
+	nlopt_result nlopt_add_equality_constraint(nlopt_opt opt, nlopt_func h, void* h_data, double tol);
+	nlopt_result nlopt_add_precond_equality_constraint(nlopt_opt opt, nlopt_func h, nlopt_precond pre, void* h_data, double tol);
+	nlopt_result nlopt_add_equality_mconstraint(nlopt_opt opt, uint m, nlopt_mfunc h, void* h_data, const(double)* tol);
 
 /* stopping criteria: */
 
-nlopt_result nlopt_set_stopval(nlopt_opt opt, double stopval);
-double nlopt_get_stopval(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_stopval(nlopt_opt opt, double stopval);
+	double nlopt_get_stopval(const(nlopt_opt) opt);
 
-nlopt_result nlopt_set_ftol_rel(nlopt_opt opt, double tol);
-double nlopt_get_ftol_rel(const(nlopt_opt) opt);
-nlopt_result nlopt_set_ftol_abs(nlopt_opt opt, double tol);
-double nlopt_get_ftol_abs(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_ftol_rel(nlopt_opt opt, double tol);
+	double nlopt_get_ftol_rel(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_ftol_abs(nlopt_opt opt, double tol);
+	double nlopt_get_ftol_abs(const(nlopt_opt) opt);
 
-nlopt_result nlopt_set_xtol_rel(nlopt_opt opt, double tol);
-double nlopt_get_xtol_rel(const(nlopt_opt) opt);
-nlopt_result nlopt_set_xtol_abs1(nlopt_opt opt, double tol);
-nlopt_result nlopt_set_xtol_abs(nlopt_opt opt, const(double)* tol);
-nlopt_result nlopt_get_xtol_abs(const(nlopt_opt) opt, double* tol);
+	nlopt_result nlopt_set_xtol_rel(nlopt_opt opt, double tol);
+	double nlopt_get_xtol_rel(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_xtol_abs1(nlopt_opt opt, double tol);
+	nlopt_result nlopt_set_xtol_abs(nlopt_opt opt, const(double)* tol);
+	nlopt_result nlopt_get_xtol_abs(const(nlopt_opt) opt, double* tol);
 
-nlopt_result nlopt_set_maxeval(nlopt_opt opt, int maxeval);
-int nlopt_get_maxeval(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_maxeval(nlopt_opt opt, int maxeval);
+	int nlopt_get_maxeval(const(nlopt_opt) opt);
 
-nlopt_result nlopt_set_maxtime(nlopt_opt opt, double maxtime);
-double nlopt_get_maxtime(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_maxtime(nlopt_opt opt, double maxtime);
+	double nlopt_get_maxtime(const(nlopt_opt) opt);
 
-nlopt_result nlopt_force_stop(nlopt_opt opt);
-nlopt_result nlopt_set_force_stop(nlopt_opt opt, int val);
-int nlopt_get_force_stop(const(nlopt_opt) opt);
+	nlopt_result nlopt_force_stop(nlopt_opt opt);
+	nlopt_result nlopt_set_force_stop(nlopt_opt opt, int val);
+	int nlopt_get_force_stop(const(nlopt_opt) opt);
 
 /* more algorithm-specific parameters */
 
-nlopt_result nlopt_set_local_optimizer(nlopt_opt opt, const(nlopt_opt) local_opt);
+	nlopt_result nlopt_set_local_optimizer(nlopt_opt opt, const(nlopt_opt) local_opt);
 
-nlopt_result nlopt_set_population(nlopt_opt opt, uint pop);
-uint nlopt_get_population(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_population(nlopt_opt opt, uint pop);
+	uint nlopt_get_population(const(nlopt_opt) opt);
 
-nlopt_result nlopt_set_vector_storage(nlopt_opt opt, uint dim);
-uint nlopt_get_vector_storage(const(nlopt_opt) opt);
+	nlopt_result nlopt_set_vector_storage(nlopt_opt opt, uint dim);
+	uint nlopt_get_vector_storage(const(nlopt_opt) opt);
 
-nlopt_result nlopt_set_default_initial_step(nlopt_opt opt, const(double)* x);
-nlopt_result nlopt_set_initial_step(nlopt_opt opt, const(double)* dx);
-nlopt_result nlopt_set_initial_step1(nlopt_opt opt, double dx);
-nlopt_result nlopt_get_initial_step(const(nlopt_opt) opt, const(double)* x, double* dx);
+	nlopt_result nlopt_set_default_initial_step(nlopt_opt opt, const(double)* x);
+	nlopt_result nlopt_set_initial_step(nlopt_opt opt, const(double)* dx);
+	nlopt_result nlopt_set_initial_step1(nlopt_opt opt, double dx);
+	nlopt_result nlopt_get_initial_step(const(nlopt_opt) opt, const(double)* x, double* dx);
+}
 
 /* the following are functions mainly designed to be used internally
    by the Fortran and SWIG wrappers, allow us to tel nlopt_destroy and
@@ -251,8 +257,11 @@ nlopt_result nlopt_get_initial_step(const(nlopt_opt) opt, const(double)* x, doub
 alias nlopt_munge = void* function(void* p);
 alias nlopt_munge2 = void* function(void* p, void* data);
 
-void nlopt_set_munge(nlopt_opt opt, nlopt_munge munge_on_destroy, nlopt_munge munge_on_copy);
-void nlopt_munge_data(nlopt_opt opt, nlopt_munge2 munge, void* data);
+extern(System)
+{
+	void nlopt_set_munge(nlopt_opt opt, nlopt_munge munge_on_destroy, nlopt_munge munge_on_copy);
+	void nlopt_munge_data(nlopt_opt opt, nlopt_munge2 munge, void* data);
+}
 
 alias nlopt_func_old = double function(int n, const(double)* x, double* gradient, void* func_data);
 
