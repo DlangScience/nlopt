@@ -263,40 +263,42 @@ extern(System)
 	void nlopt_munge_data(nlopt_opt opt, nlopt_munge2 munge, void* data);
 }
 
-alias nlopt_func_old = double function(int n, const(double)* x, double* gradient, void* func_data);
+deprecated
+{
+	alias nlopt_func_old = double function(int n, const(double)* x, double* gradient, void* func_data);
 
-nlopt_result nlopt_minimize(nlopt_algorithm algorithm, int n, nlopt_func_old f, void* f_data,
-     const(double)* lb, const(double)* ub, double* x, double* minf,
-     double minf_max, double ftol_rel, double ftol_abs,
-     double xtol_rel, const(double)* xtol_abs, int maxeval, double maxtime);
+	nlopt_result nlopt_minimize(nlopt_algorithm algorithm, int n, nlopt_func_old f, void* f_data,
+		 const(double)* lb, const(double)* ub, double* x, double* minf,
+		 double minf_max, double ftol_rel, double ftol_abs,
+		 double xtol_rel, const(double)* xtol_abs, int maxeval, double maxtime);
 
-nlopt_result nlopt_minimize_constrained(
-     nlopt_algorithm algorithm,
-     int n, nlopt_func_old f, void* f_data,
-     int m, nlopt_func_old fc, void* fc_data, ptrdiff_t fc_datum_size,
-     const(double)*lb, const(double)* ub, /* bounds */
-     double* x, /* in: initial guess, out: minimizer */
-     double* minf, /* out: minimum */
-     double minf_max, double ftol_rel, double ftol_abs,
-     double xtol_rel, const(double)* xtol_abs,
-     int maxeval, double maxtime);
+	nlopt_result nlopt_minimize_constrained(
+		 nlopt_algorithm algorithm,
+		 int n, nlopt_func_old f, void* f_data,
+		 int m, nlopt_func_old fc, void* fc_data, ptrdiff_t fc_datum_size,
+		 const(double)*lb, const(double)* ub, /* bounds */
+		 double* x, /* in: initial guess, out: minimizer */
+		 double* minf, /* out: minimum */
+		 double minf_max, double ftol_rel, double ftol_abs,
+		 double xtol_rel, const(double)* xtol_abs,
+		 int maxeval, double maxtime);
 
-nlopt_result nlopt_minimize_econstrained(
-     nlopt_algorithm algorithm,
-     int n, nlopt_func_old f, void* f_data,
-     int m, nlopt_func_old fc, void* fc_data, ptrdiff_t fc_datum_size,
-     int p, nlopt_func_old h, void* h_data, ptrdiff_t h_datum_size,
-     const(double)* lb, const(double)* ub, /* bounds */
-     double* x, /* in: initial guess, out: minimizer */
-     double* minf, /* out: minimum */
-     double minf_max, double ftol_rel, double ftol_abs,
-     double xtol_rel, const(double)* xtol_abs,
-     double htol_rel, double htol_abs,
-     int maxeval, double maxtime);
+	nlopt_result nlopt_minimize_econstrained(
+		 nlopt_algorithm algorithm,
+		 int n, nlopt_func_old f, void* f_data,
+		 int m, nlopt_func_old fc, void* fc_data, ptrdiff_t fc_datum_size,
+		 int p, nlopt_func_old h, void* h_data, ptrdiff_t h_datum_size,
+		 const(double)* lb, const(double)* ub, /* bounds */
+		 double* x, /* in: initial guess, out: minimizer */
+		 double* minf, /* out: minimum */
+		 double minf_max, double ftol_rel, double ftol_abs,
+		 double xtol_rel, const(double)* xtol_abs,
+		 double htol_rel, double htol_abs,
+		 int maxeval, double maxtime);
 
-void nlopt_get_local_search_algorithm(nlopt_algorithm* deriv,nlopt_algorithm* nonderiv, int* maxeval);
-void nlopt_set_local_search_algorithm(nlopt_algorithm deriv, nlopt_algorithm nonderiv, int maxeval);
+	void nlopt_get_local_search_algorithm(nlopt_algorithm* deriv,nlopt_algorithm* nonderiv, int* maxeval);
+	void nlopt_set_local_search_algorithm(nlopt_algorithm deriv, nlopt_algorithm nonderiv, int maxeval);
 
-int nlopt_get_stochastic_population();
-void nlopt_set_stochastic_population(int pop);
-
+	int nlopt_get_stochastic_population();
+	void nlopt_set_stochastic_population(int pop);
+}
