@@ -8,7 +8,7 @@ module nlopt;
 extern (C):
 
 alias nlopt_func = double function(uint n, const(double)* x, double* gradient, void* func_data);
-alias nlopt_mfunc = double function(uint m, double* result, uint n, const(double)* x, double* gradient, void* func_data);
+alias nlopt_mfunc = void function(uint m, double* result, uint n, const(double)* x, double* gradient, void* func_data);
 alias nlopt_precond = void function(uint n, const(double)* x, const(double)* v, double* vpre, void* data);
 
 
