@@ -5,6 +5,8 @@ Authors: Chibisi Chima-Okereke
 
 module nlopt;
 
+import core.stdc.config : c_ulong;
+
 extern (C):
 
 alias nlopt_func = double function(uint n, const(double)* x, double* gradient, void* func_data);
@@ -161,7 +163,7 @@ enum NLOPT_MAXTIME_REACHED = nlopt_result.NLOPT_MAXTIME_REACHED;
 
 extern(System)
 {
-	void nlopt_srand(ulong seed);
+	void nlopt_srand(c_ulong seed);
 	void nlopt_srand_time();
 	void nlopt_version(int* major, int* minor, int* bugfix);
 }
